@@ -1,14 +1,8 @@
-import {
-  Avatar,
-  Button,
-  HStack,
-  Icon,
-  Stack,
-  Textarea,
-} from "@chakra-ui/react";
+import { Button, HStack, Icon, Stack, Textarea } from "@chakra-ui/react";
 import { ChangeEvent, useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
+import { AvatarUser } from "../components/AvatarUser";
 import { useHookerContext } from "../context/HookerContext";
 
 export const ComposeHuik = () => {
@@ -24,7 +18,7 @@ export const ComposeHuik = () => {
     handleAddHuik(huik);
     setTimeout(() => {
       navigate("/");
-    }, 2000);
+    }, 500);
   };
 
   return (
@@ -37,17 +31,20 @@ export const ComposeHuik = () => {
           colorScheme="primary"
           borderRadius="9999"
           onClick={handleCompose}
+          isDisabled={huik.length === 0 ? true : false}
         >
           Tweet
         </Button>
       </HStack>
       <HStack alignItems="start" spacing={5}>
-        <Avatar />
+        <AvatarUser size="md" />
         <Textarea
           fontSize="20px"
           placeholder="What's happening?"
           variant="unstyled"
           resize="none"
+          minH="150px"
+          autoFocus={true}
           onChange={(e) => handleChange(e)}
         />
       </HStack>

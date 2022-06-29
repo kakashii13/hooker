@@ -14,9 +14,9 @@ export const themeChakra = extendTheme({
         bg: "gray.800",
         color: "white",
       },
-      svg: {
-        cursor: "pointer",
-      },
+      // svg: {
+      //   cursor: "pointer",
+      // },
     },
   },
 });
