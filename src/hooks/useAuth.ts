@@ -7,5 +7,10 @@ export const useAuth = () => {
     return signInWithPopup(auth, provider);
   };
 
-  return signWithGithub;
+  const mapUser = (user: any) => {
+    const { email, displayName, photoURL, uid } = user;
+    return { email, displayName, photoURL, uid };
+  };
+
+  return { signWithGithub, mapUser };
 };

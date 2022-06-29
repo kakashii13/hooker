@@ -5,7 +5,7 @@ import { useAuth } from "../hooks/useAuth";
 
 export const Login = () => {
   const { currentUser } = useHookerContext();
-  const signWithGithub = useAuth();
+  const { signWithGithub } = useAuth();
 
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -24,7 +24,6 @@ export const Login = () => {
           Login with GitHub
         </Button>
       </form>
-      <Text>{currentUser}</Text>
     </VStack>
   );
 };

@@ -4,6 +4,9 @@ export const themeChakra = extendTheme({
   colors: {
     primary: theme.colors.purple,
   },
+  fonts: {
+    body: `"Roboto", sans-serif`,
+  },
   styles: {
     global: {
       "html, body, #root": {

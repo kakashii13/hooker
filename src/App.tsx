@@ -5,6 +5,7 @@ import { ComposeHuik } from "./pages/ComposeHuik";
 import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
 import { themeChakra } from "./theme";
+import "@fontsource/roboto";
 
 function App() {
   return (
