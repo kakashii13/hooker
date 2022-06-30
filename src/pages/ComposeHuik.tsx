@@ -1,9 +1,11 @@
 import { Button, HStack, Icon, Stack, Textarea } from "@chakra-ui/react";
+import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 import { ChangeEvent, useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import { AvatarUser } from "../components/AvatarUser";
 import { useHookerContext } from "../context/HookerContext";
+import { db } from "../firebase/client";
 
 export const ComposeHuik = () => {
   const [huik, sethuik] = useState("");
@@ -14,11 +16,12 @@ export const ComposeHuik = () => {
     sethuik(e.target.value);
   };
 
-  const handleCompose = () => {
-    handleAddHuik(huik);
-    setTimeout(() => {
-      navigate("/");
-    }, 500);
+  const addToFirebase = async () => {
+    // const docRef = (db, "Huiks");
+    await addDoc(collection(db, "Huiks"), {
+      // armar el obj del huik, dataUser, avatar, text ...
+      text: huik,
+    });
   };
 
   return (
@@ -30,7 +33,7 @@ export const ComposeHuik = () => {
         <Button
           colorScheme="primary"
           borderRadius="9999"
-          onClick={handleCompose}
+          onClick={addToFirebase}
           isDisabled={huik.length === 0 ? true : false}
         >
           Tweet
