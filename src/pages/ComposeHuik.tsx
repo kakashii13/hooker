@@ -1,5 +1,5 @@
 import { Button, HStack, Icon, Stack, Textarea } from "@chakra-ui/react";
-import { addDoc, collection, doc, setDoc } from "firebase/firestore";
+import { addDoc, collection, Timestamp } from "firebase/firestore";
 import { ChangeEvent, useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
@@ -9,7 +9,7 @@ import { db } from "../firebase/client";
 
 export const ComposeHuik = () => {
   const [huik, sethuik] = useState("");
-  const { handleAddHuik } = useHookerContext();
+  const { currentUser } = useHookerContext();
   const navigate = useNavigate();
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -17,11 +17,18 @@ export const ComposeHuik = () => {
   };
 
   const addToFirebase = async () => {
-    // const docRef = (db, "Huiks");
-    await addDoc(collection(db, "Huiks"), {
-      // armar el obj del huik, dataUser, avatar, text ...
-      text: huik,
-    });
+    const huikObj = {
+      name: currentUser?.displayName,
+      userName: currentUser?.email,
+      content: huik,
+      avatar: currentUser?.photoURL,
+      idUser: currentUser?.uid,
+      createdAt: Timestamp.fromDate(new Date()),
+      likesCount: 0,
+      sharedCount: 0,
+    };
+    await addDoc(collection(db, "Huiks"), huikObj);
+    navigate("/");
   };
 
   return (
