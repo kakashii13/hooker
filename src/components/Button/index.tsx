@@ -7,12 +7,13 @@ export const ButtonCompose = () => {
     <Link to="/compose/huik">
       <Button
         colorScheme={"primary"}
-        position="absolute"
+        position="fixed"
         borderRadius="9999px"
         h="56px"
         w="56px"
         right="10px"
-        bottom="10%"
+        bottom="20px"
+        zIndex="10000"
       >
         <Icon as={AiOutlinePlus} h="24px" w="24px" />
       </Button>

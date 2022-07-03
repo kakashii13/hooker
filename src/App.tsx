@@ -2,21 +2,45 @@ import { ChakraProvider, Container } from "@chakra-ui/react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { HookerProvider } from "./context/HookerContext";
 import { ComposeHuik } from "./pages/ComposeHuik";
+import { HuikDetail } from "./pages/HuikDetail";
 import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
 import { themeChakra } from "./theme";
 import "@fontsource/roboto";
+import { PrivateRoute } from "./components/PrivateRoute";
 
 function App() {
   return (
     <ChakraProvider theme={themeChakra}>
       <HookerProvider>
-        <Container h="100%">
+        <Container p="0">
           <BrowserRouter>
             <Routes>
-              <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/compose/huik" element={<ComposeHuik />} />
+              <Route
+                path="/"
+                element={
+                  <PrivateRoute>
+                    <Home />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/:user/status/:huikId"
+                element={
+                  <PrivateRoute>
+                    <HuikDetail />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/compose/huik"
+                element={
+                  <PrivateRoute>
+                    <ComposeHuik />
+                  </PrivateRoute>
+                }
+              />
             </Routes>
           </BrowserRouter>
         </Container>

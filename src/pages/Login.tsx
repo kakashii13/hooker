@@ -1,16 +1,17 @@
-import { Button, Heading, Text, VStack } from "@chakra-ui/react";
-import React, { FormEvent } from "react";
-import { useHookerContext } from "../context/HookerContext";
+import { Button, Heading, VStack } from "@chakra-ui/react";
+import { FormEvent } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 
 export const Login = () => {
-  const { currentUser } = useHookerContext();
   const { signWithGithub } = useAuth();
+  const navigate = useNavigate();
 
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      signWithGithub();
+      await signWithGithub();
+      navigate("/");
     } catch {
       console.log("error");
     }

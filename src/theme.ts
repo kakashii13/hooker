@@ -10,7 +10,6 @@ export const themeChakra = extendTheme({
   styles: {
     global: {
       "html, body, #root": {
-        height: "100%",
         bg: "gray.800",
         color: "white",
       },

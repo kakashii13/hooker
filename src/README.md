@@ -1,2 +1,2 @@
 - Road_Map:
-  NexStep: guardar los huiks en firebase / obtener los huiks de firebase
+  NexStep: rutas protegidas, agregar imagenes, eliminar los huiks
