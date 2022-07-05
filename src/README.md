@@ -1,2 +1,2 @@
 - Road_Map:
-  NexStep: rutas protegidas, agregar imagenes, eliminar los huiks
+  NexStep: agregar imagenes, eliminar los huiks, skeleton and loading

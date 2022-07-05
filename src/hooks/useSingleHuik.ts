@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { getSingleHuik } from "../firebase/client";
-import { Huik } from "../types";
+import { HuikProp } from "../types";
 
 export const useSingleHuik = (id: string) => {
-  const [huik, setHuik] = useState<Huik>();
+  const [huik, setHuik] = useState<HuikProp>();
 
   useEffect(() => {
-    getSingleHuik(id).then((response) => setHuik(response as Huik));
+    getSingleHuik(id).then((response) => setHuik(response as HuikProp));
   }, [id]);
 
   return { huik };

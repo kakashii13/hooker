@@ -34,7 +34,6 @@ export const getHuiks = async (collectionName: string) => {
     const data = doc.data();
     const id = doc.id;
     const { createdAt } = data;
-
     return {
       ...data,
       id,
@@ -47,5 +46,8 @@ export const getSingleHuik = async (id: string) => {
   const docRef = doc(db, "Huiks", id);
   const docSnap = await getDoc(docRef);
   const response = docSnap.data();
-  return response;
+  if (!response) return;
+  const { createdAt } = response;
+
+  return { ...response, createdAt: +createdAt.toDate() };
 };
