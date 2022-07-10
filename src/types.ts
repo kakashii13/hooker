@@ -28,3 +28,9 @@ export interface User {
 export interface RouteProps {
   children: JSX.Element;
 }
+
+export interface HuikLinkProps {
+  children: JSX.Element;
+  id: string;
+  userName: string;
+}

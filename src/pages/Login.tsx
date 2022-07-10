@@ -1,14 +1,12 @@
 import { Button, Heading, VStack } from "@chakra-ui/react";
-import { FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 
 export const Login = () => {
-  const { signWithGithub } = useAuth();
+  const { signWithGithub, signWithGoogle } = useAuth();
   const navigate = useNavigate();
 
-  const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const loginWithGithub = async () => {
     try {
       await signWithGithub();
       navigate("/");
@@ -16,15 +14,25 @@ export const Login = () => {
       console.log("error");
     }
   };
+  const loginWithGoogle = async () => {
+    try {
+      await signWithGoogle();
+      navigate("/");
+    } catch (error) {
+      const errortest = await error;
+      console.log(errortest);
+    }
+  };
 
   return (
     <VStack justifyContent="center" alignItems="center" h="100%">
       <Heading>Hooker</Heading>
-      <form onSubmit={(e) => handleLogin(e)}>
-        <Button colorScheme="whiteAlpha" type="submit">
-          Login with GitHub
-        </Button>
-      </form>
+      <Button colorScheme="whiteAlpha" type="submit" onClick={loginWithGithub}>
+        Login with GitHub
+      </Button>
+      <Button colorScheme="blackAlpha" type="submit" onClick={loginWithGoogle}>
+        Login with Google
+      </Button>
     </VStack>
   );
 };

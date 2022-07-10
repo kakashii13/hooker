@@ -2,6 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import {
   collection,
+  deleteDoc,
   doc,
   getDoc,
   getDocs,
@@ -9,6 +10,12 @@ import {
   orderBy,
   query,
 } from "firebase/firestore";
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  uploadBytesResumable,
+} from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAyBj2Et1mKxi8KLVqsofGiQsryEfILn-M",
@@ -50,4 +57,15 @@ export const getSingleHuik = async (id: string) => {
   const { createdAt } = response;
 
   return { ...response, createdAt: +createdAt.toDate() };
+};
+
+export const deleteHuik = async (id: string) => {
+  const docSnap = await deleteDoc(doc(db, "Huiks", id));
+};
+
+export const uploadImage = (file: File) => {
+  const storage = getStorage();
+  const storageRef = ref(storage, `images/${file.name}`);
+  const task = uploadBytesResumable(storageRef, file);
+  return task;
 };

@@ -1,11 +1,10 @@
 import { Avatar } from "@chakra-ui/react";
-import { useHookerContext } from "../../context/HookerContext";
 
 interface AvatarProp {
   size: string;
+  avatar: string;
 }
 
-export const AvatarUser = ({ size }: AvatarProp) => {
-  const { currentUser } = useHookerContext();
-  return <Avatar size={size} src={currentUser?.photoURL} />;
+export const AvatarUser = ({ size, avatar }: AvatarProp) => {
+  return <Avatar size={size} src={avatar} />;
 };
