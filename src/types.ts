@@ -8,6 +8,7 @@ export interface HuikProp {
   sharedCount: number;
   id: string;
   name: string;
+  contentImg?: string
 }
 
 export interface PropsChildren {
@@ -16,7 +17,7 @@ export interface PropsChildren {
 
 export interface ContextProps {
   huiks: HuikProp[];
-  currentUser: User | undefined;
+  currentUser: User | undefined | null;
 }
 export interface User {
   email: string;

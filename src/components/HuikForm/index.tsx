@@ -1,11 +1,7 @@
 import { HStack, Icon, Image, Stack, Textarea, VStack } from "@chakra-ui/react";
-import { Timestamp } from "firebase/firestore";
-import { UploadTask, UploadTaskSnapshot } from "firebase/storage";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent} from "react";
 import { RiCloseFill } from "react-icons/ri";
-import { useNavigate } from "react-router-dom";
-import { useHookerContext } from "../../context/HookerContext";
-
+import { useUploadImg } from "../../hooks/useUploadImg";
 enum DragImageStates {
   ERROR = -1,
   NONE = 0,
@@ -14,18 +10,16 @@ enum DragImageStates {
   COMPLETE = 3,
 }
 
-export const HuikForm = () => {
-  const [drag, setDrag] = useState(DragImageStates.NONE);
-  const [file, setFile] = useState<File | undefined>(undefined);
-  const [task, setTask] = useState<UploadTask | null>(null);
+interface HuikFormProps {
+  handleChange: (e: ChangeEvent<HTMLTextAreaElement>) => void
+  FUCK YOU TYPESCRIPTTTTTTTT
+}
 
-  const { currentUser } = useHookerContext();
-  const navigate = useNavigate();
 
-  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setContentHuik(e.target.value);
-  };
 
+
+export const HuikForm = ({handleChange}: HuikFormProps    )  => {
+  
   const handleDragEnter = (e: React.DragEvent<HTMLTextAreaElement>) => {
     e.preventDefault();
     setDrag(DragImageStates.DRAG_OVER);
@@ -44,42 +38,6 @@ export const HuikForm = () => {
     const taskTest = uploadImage(file);
     setTask(taskTest);
   };
-
-  useEffect(() => {
-    if (task) {
-      const onProgress = (snapshot: UploadTaskSnapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        setImgUploadProgress(progress);
-      };
-      const onError = () => {};
-      const onComplete = () => {
-        console.log("onComplete");
-        // leer el link de firebase para mostrar la imagen antes de "publicar"
-      };
-
-      task.on(
-        "state_changed",
-        (snapshot) => onProgress(snapshot),
-        onError,
-        onComplete
-      );
-    }
-  }, [task]);
-
-  useEffect(() => {
-    if (file) {
-      const fileReader = new FileReader();
-      fileReader.onload = (e) => {
-        if (!e.target) return;
-        const { result } = e.target;
-        if (result) {
-          setImgURL(result);
-        }
-      };
-      fileReader.readAsDataURL(file);
-    }
-  }, [file]);
 
   return (
     <VStack w="100%">
@@ -100,9 +58,9 @@ export const HuikForm = () => {
         onDragLeave={(e) => handleDragLeave(e)}
         onDrop={(e) => handleDragDrop(e)}
       />
-      {imgURL && (
+      {previewImg && (
         <Stack position="relative">
-          <Image borderRadius="15px" src={imgURL} />
+          <Image borderRadius="15px" src={previewImg} />
           <HStack
             justifyContent="space-between"
             borderRadius="9999"
@@ -115,7 +73,7 @@ export const HuikForm = () => {
             bg="blackAlpha.300"
             p="8px"
           >
-            <Icon as={RiCloseFill} h="17px" w="17px" />
+            <Icon as={RiCloseFill} h="17px" w="17px" onClick={handleDelete}/>
           </HStack>
         </Stack>
       )}

@@ -1,4 +1,4 @@
-import { HStack, Icon, Stack, Text, VStack } from "@chakra-ui/react";
+import { HStack, Icon, Image, Stack, Text, VStack } from "@chakra-ui/react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { useHookerContext } from "../../context/HookerContext";
 import { deleteHuik } from "../../firebase/client";
@@ -15,6 +15,7 @@ export const Huik = ({
   createdAt,
   avatar,
   idUser,
+  contentImg
 }: HuikProp) => {
   const timeago = useTimeago(createdAt);
   const { currentUser } = useHookerContext();
@@ -56,6 +57,7 @@ export const Huik = ({
             </VStack>
           </HStack>
           <Text>{content}</Text>
+          <Image src={contentImg}/> 
         </Stack>
       </HStack>
       {idUser === currentUser?.uid && (

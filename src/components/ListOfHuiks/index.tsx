@@ -18,6 +18,7 @@ export const ListOfHuiks = () => {
           userName,
           id,
           name,
+          contentImg
         }) => (
           <HuikLink id={id} userName={userName} key={id}>
             <Huik
@@ -30,6 +31,7 @@ export const ListOfHuiks = () => {
               sharedCount={sharedCount}
               userName={userName}
               id={id}
+              contentImg={contentImg}
             />
           </HuikLink>
         )
