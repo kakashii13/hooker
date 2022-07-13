@@ -10,19 +10,14 @@ enum ComposeStatus {
   ERROR = -1,
 }
 
-interface test {
-  contentHuik: string; 
-  imgURL: string | null
-}
-
 export const useUploadHuik = (contentHuik: string, imgURL: string | null) => {
-const {currentUser} = useHookerContext();
-const [status, setStatus] = useState<number>()
-const navigate = useNavigate();
+  const { currentUser } = useHookerContext();
+  const [status, setStatus] = useState<number>();
+  const navigate = useNavigate();
 
   const addToFirebase = async () => {
-    if(!currentUser) return; 
-    const {displayName, email, photoURL, uid} = currentUser
+    if (!currentUser) return;
+    const { displayName, email, photoURL, uid } = currentUser;
     const huikObj = {
       name: displayName,
       userName: email,
@@ -33,7 +28,6 @@ const navigate = useNavigate();
       createdAt: Timestamp.fromDate(new Date()),
       likesCount: 0,
       sharedCount: 0,
-      
     };
     setStatus(ComposeStatus.LOADING);
     await addDoc(collection(db, "Huiks"), huikObj);
@@ -41,8 +35,5 @@ const navigate = useNavigate();
     navigate("/");
   };
 
-
-  
-
-  return {addToFirebase, status}
+  return { addToFirebase, status };
 };

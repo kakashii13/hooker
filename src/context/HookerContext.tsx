@@ -10,7 +10,9 @@ export const useHookerContext = () => useContext(hookerContext);
 
 export const HookerProvider = ({ children }: PropsChildren) => {
   const [huiks, setHuiks] = useState<HuikProp[]>([]);
-  const [currentUser, setCurrentUser] = useState<User | undefined | null>(undefined);
+  const [currentUser, setCurrentUser] = useState<User | undefined | null>(
+    undefined
+  );
   const { mapUser } = useAuth();
 
   useEffect(() => {
@@ -19,13 +21,17 @@ export const HookerProvider = ({ children }: PropsChildren) => {
         const normalizeUser = mapUser(user);
         setCurrentUser(normalizeUser);
       } else {
-        setCurrentUser(user)
+        setCurrentUser(user);
       }
     });
   }, []);
 
   useEffect(() => {
-    getHuiks("Huiks").then((huik) => setHuiks(huik as HuikProp[]));
+    let isSubscribe = true;
+
+    if (isSubscribe) getHuiks(setHuiks);
+
+    () => (isSubscribe = false);
   }, []);
 
   return (

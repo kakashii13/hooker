@@ -15,7 +15,7 @@ export const Huik = ({
   createdAt,
   avatar,
   idUser,
-  contentImg
+  contentImg,
 }: HuikProp) => {
   const timeago = useTimeago(createdAt);
   const { currentUser } = useHookerContext();
@@ -38,7 +38,7 @@ export const Huik = ({
         mt="0!important"
         p="12px 5px"
       >
-        <Stack spacing={5}>
+        <Stack spacing={3}>
           <HStack alignItems="start" spacing={4}>
             <AvatarUser size="md" avatar={avatar} />
             <VStack alignItems="start">
@@ -52,12 +52,14 @@ export const Huik = ({
                 mt="0!important"
               >
                 <Text>{`@${userNameNormalize}`}</Text>
-                <Text>{`· ${timeago}`}</Text>
+                <time>{`· ${timeago}`}</time>
               </HStack>
             </VStack>
           </HStack>
           <Text>{content}</Text>
-          <Image src={contentImg}/> 
+          <Stack>
+            <Image src={contentImg} borderRadius="10px" />
+          </Stack>
         </Stack>
       </HStack>
       {idUser === currentUser?.uid && (
@@ -68,6 +70,7 @@ export const Huik = ({
           _hover={{ bg: "gray.700", transition: "0.5s" }}
           cursor="pointer"
           position="absolute"
+          zIndex="1000"
           right="5"
           onClick={handleDelete}
         >

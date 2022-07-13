@@ -31,8 +31,7 @@ export const useTimeago = (timestamp: number) => {
   }, [timestamp]);
 
   const rtf = new Intl.RelativeTimeFormat("es", { style: "short" });
-  // solucionar esto 🤔
-  const { value, unit } = timeago;
+  // if (!timeago?.value && !timeago?.unit) return;
 
-  return rtf.format(value, unit);
+  return rtf.format(timeago?.value, timeago?.unit);
 };

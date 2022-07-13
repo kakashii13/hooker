@@ -6,7 +6,7 @@ import { NavBar } from "../components/NavBar";
 
 export const Home = () => {
   return (
-    <VStack h="100%" justifyContent="space-between" pt="20px">
+    <VStack h="100%" justifyContent="space-between">
       <Header />
       <ListOfHuiks />
       <ButtonCompose />

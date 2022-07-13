@@ -7,6 +7,7 @@ import {
   getDoc,
   getDocs,
   getFirestore,
+  onSnapshot,
   orderBy,
   query,
 } from "firebase/firestore";
@@ -33,19 +34,23 @@ export const auth = getAuth(app);
 
 export const db = getFirestore(app);
 
-export const getHuiks = async (collectionName: string) => {
-  const docRef = collection(db, collectionName);
+const mapHuiksFromFirebase = (doc) => {
+  const data = doc.data();
+  const id = doc.id;
+  const { createdAt } = data;
+  return {
+    ...data,
+    id,
+    createdAt: +createdAt.toDate(),
+  };
+};
+
+export const getHuiks = async (callback) => {
+  const docRef = collection(db, "Huiks");
   const q = query(docRef, orderBy("createdAt", "desc"));
-  const unsub = await getDocs(q);
-  return unsub.docs.map((doc) => {
-    const data = doc.data();
-    const id = doc.id;
-    const { createdAt } = data;
-    return {
-      ...data,
-      id,
-      createdAt: +createdAt.toDate(),
-    };
+  onSnapshot(q, ({ docs }) => {
+    const newHuiks = docs.map(mapHuiksFromFirebase);
+    callback(newHuiks);
   });
 };
 
@@ -60,7 +65,7 @@ export const getSingleHuik = async (id: string) => {
 };
 
 export const deleteHuik = async (id: string) => {
-  const docSnap = await deleteDoc(doc(db, "Huiks", id));
+  await deleteDoc(doc(db, "Huiks", id));
 };
 
 export const uploadImage = (file: File) => {
