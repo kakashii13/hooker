@@ -1,7 +1,6 @@
 import { VStack } from "@chakra-ui/react";
 import { useHookerContext } from "../../context/HookerContext";
 import { Huik } from "../Huik";
-import { HuikLink } from "../HuikLink";
 
 export const ListOfHuiks = () => {
   const { huiks } = useHookerContext();
@@ -20,7 +19,6 @@ export const ListOfHuiks = () => {
           name,
           contentImg
         }) => (
-          <HuikLink id={id} userName={userName} key={id}>
             <Huik
               name={name}
               avatar={avatar}
@@ -32,8 +30,8 @@ export const ListOfHuiks = () => {
               userName={userName}
               id={id}
               contentImg={contentImg}
+              key={id}
             />
-          </HuikLink>
         )
       )}
     </VStack>

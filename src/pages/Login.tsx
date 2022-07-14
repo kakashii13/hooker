@@ -25,7 +25,7 @@ export const Login = () => {
   };
 
   return (
-    <VStack justifyContent="center" alignItems="center" h="100%">
+    <VStack justifyContent="center" alignItems="center" h="100vh" spacing={5}>
       <Heading>Hooker</Heading>
       <Button colorScheme="whiteAlpha" type="submit" onClick={loginWithGithub}>
         Login with GitHub

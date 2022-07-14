@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import {
+  addDoc,
   collection,
   deleteDoc,
   doc,
@@ -17,6 +18,7 @@ import {
   uploadBytes,
   uploadBytesResumable,
 } from "firebase/storage";
+import { HuikProp } from "../types";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAyBj2Et1mKxi8KLVqsofGiQsryEfILn-M",
@@ -34,8 +36,12 @@ export const auth = getAuth(app);
 
 export const db = getFirestore(app);
 
-const mapHuiksFromFirebase = (doc) => {
-  const data = doc.data();
+export const getHuiks = async (callback) => {
+  const docRef = collection(db, "Huiks");
+  const q = query(docRef, orderBy("createdAt", "desc"));
+  onSnapshot(q, ({ docs }) => {
+    const newHuiks = docs.map((doc) => {
+      const data = doc.data();
   const id = doc.id;
   const { createdAt } = data;
   return {
@@ -43,13 +49,7 @@ const mapHuiksFromFirebase = (doc) => {
     id,
     createdAt: +createdAt.toDate(),
   };
-};
-
-export const getHuiks = async (callback) => {
-  const docRef = collection(db, "Huiks");
-  const q = query(docRef, orderBy("createdAt", "desc"));
-  onSnapshot(q, ({ docs }) => {
-    const newHuiks = docs.map(mapHuiksFromFirebase);
+    });
     callback(newHuiks);
   });
 };
@@ -73,4 +73,9 @@ export const uploadImage = (file: File) => {
   const storageRef = ref(storage, `images/${file.name}`);
   const task = uploadBytesResumable(storageRef, file);
   return task;
+};
+
+
+export const addToFirebase = async (huik: HuikProp) => {
+  return addDoc(collection(db, "Huiks"), huik);
 };

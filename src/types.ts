@@ -1,14 +1,16 @@
+import { Timestamp } from "firebase/firestore";
+
 export interface HuikProp {
   userName: string;
   content: string;
   avatar: string;
   idUser: string;
-  createdAt: number;
+  createdAt: number | Timestamp;
   likesCount: number;
   sharedCount: number;
-  id: string;
+  id?: string;
   name: string;
-  contentImg?: string
+  contentImg?: string | null
 }
 
 export interface PropsChildren {

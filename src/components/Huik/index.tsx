@@ -1,9 +1,11 @@
 import { HStack, Icon, Image, Stack, Text, VStack } from "@chakra-ui/react";
+import React from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { Link, useNavigate } from "react-router-dom";
 import { useHookerContext } from "../../context/HookerContext";
 import { deleteHuik } from "../../firebase/client";
 import { useAlert } from "../../hooks/useAlert";
-import { useTimeago } from "../../hooks/useTimeago";
+import { useTimeago } from "../../hooks/useTimeAgo";
 import { HuikProp } from "../../types";
 import { AvatarUser } from "../AvatarUser";
 
@@ -17,26 +19,40 @@ export const Huik = ({
   idUser,
   contentImg,
 }: HuikProp) => {
-  const timeago = useTimeago(createdAt);
   const { currentUser } = useHookerContext();
-
+  const timeago = useTimeago(createdAt) 
+  
   const createAlert = useAlert();
+  let navigate = useNavigate() 
 
   const indexOf = userName.lastIndexOf("@");
   const userNameNormalize = userName.slice(0, indexOf);
 
-  const handleDelete = () => {
+  const handleDelete = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.stopPropagation()
     deleteHuik(id);
     createAlert();
   };
 
+  const handleLink = () => {
+    navigate(`/${userName}/status/${id}`)
+  }
+
   return (
-    <Stack w="100%" mt="0!important" px="16px" position="relative">
+    <Stack w="100%"
+    _hover={{ bg: "#232e39" }}
+    borderBottom="1px solid #38444d"
+    mt="0!important"
+    cursor="pointer"
+    position="relative"
+    px="16px"
+    onClick={handleLink}
+    >
       <HStack
         justifyContent="space-between"
         alignItems="start"
         mt="0!important"
-        p="12px 5px"
+        p="12px 5px" 
       >
         <Stack spacing={3}>
           <HStack alignItems="start" spacing={4}>
@@ -51,8 +67,17 @@ export const Huik = ({
                 color="#8b98a5"
                 mt="0!important"
               >
-                <Text>{`@${userNameNormalize}`}</Text>
-                <time>{`· ${timeago}`}</time>
+                <Text>{`@${userNameNormalize} `}</Text>
+                <span>
+                ·
+                </span>
+    <Link to={`/${userName}/status/${id}`}>
+    <Stack _hover={{
+      textDecoration: "underline"
+    }}>
+    <time>{`${timeago}`}</time>
+    </Stack>
+    </Link>
               </HStack>
             </VStack>
           </HStack>
@@ -72,7 +97,7 @@ export const Huik = ({
           position="absolute"
           zIndex="1000"
           right="5"
-          onClick={handleDelete}
+          onClick={(e) => handleDelete(e)}
         >
           <Icon as={RiDeleteBin6Line} color="red.500" />
         </HStack>
