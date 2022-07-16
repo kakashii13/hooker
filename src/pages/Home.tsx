@@ -1,16 +1,23 @@
-import { VStack } from "@chakra-ui/react";
+import { Spinner, Stack, VStack } from "@chakra-ui/react";
 import { ButtonCompose } from "../components/Button";
 import { Header } from "../components/Header";
 import { ListOfHuiks } from "../components/ListOfHuiks";
-import { NavBar } from "../components/NavBar";
+import { Helmet } from "react-helmet";
+import { useHookerContext } from "../context/HookerContext";
 
 export const Home = () => {
+  const { loading } = useHookerContext();
+
   return (
-    <VStack h="100%" justifyContent="space-between">
+    <VStack minH="93%">
+      <Helmet>
+        <title> Home / Hooker</title>
+      </Helmet>
       <Header />
-      <ListOfHuiks />
-      <ButtonCompose />
-      <NavBar />
+      <Stack>
+        {loading ? <Spinner /> : <ListOfHuiks />}
+        <ButtonCompose />
+      </Stack>
     </VStack>
   );
 };

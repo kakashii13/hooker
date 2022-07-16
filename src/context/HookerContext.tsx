@@ -13,6 +13,8 @@ export const HookerProvider = ({ children }: PropsChildren) => {
   const [currentUser, setCurrentUser] = useState<User | undefined | null>(
     undefined
   );
+  const [loading, setLoading] = useState(false);
+
   const { mapUser } = useAuth();
 
   useEffect(() => {
@@ -29,13 +31,21 @@ export const HookerProvider = ({ children }: PropsChildren) => {
   useEffect(() => {
     let isSubscribe = true;
 
-    if (isSubscribe) getHuiks(setHuiks);
+    const handleTest = (huiks, loading) => {
+      setHuiks(huiks);
+      setLoading(loading);
+    };
+
+    if (isSubscribe) {
+      setLoading(true);
+      getHuiks(handleTest);
+    }
 
     () => (isSubscribe = false);
   }, []);
 
   return (
-    <hookerContext.Provider value={{ huiks, currentUser }}>
+    <hookerContext.Provider value={{ huiks, currentUser, loading }}>
       {children}
     </hookerContext.Provider>
   );

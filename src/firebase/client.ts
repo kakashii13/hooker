@@ -5,19 +5,12 @@ import {
   collection,
   deleteDoc,
   doc,
-  getDoc,
-  getDocs,
   getFirestore,
   onSnapshot,
   orderBy,
   query,
 } from "firebase/firestore";
-import {
-  getStorage,
-  ref,
-  uploadBytes,
-  uploadBytesResumable,
-} from "firebase/storage";
+import { getStorage, ref, uploadBytesResumable } from "firebase/storage";
 import { HuikProp } from "../types";
 
 const firebaseConfig = {
@@ -36,32 +29,36 @@ export const auth = getAuth(app);
 
 export const db = getFirestore(app);
 
-export const getHuiks = async (callback) => {
+export const getHuiks = (callback: any) => {
   const docRef = collection(db, "Huiks");
   const q = query(docRef, orderBy("createdAt", "desc"));
   onSnapshot(q, ({ docs }) => {
     const newHuiks = docs.map((doc) => {
       const data = doc.data();
-  const id = doc.id;
-  const { createdAt } = data;
-  return {
-    ...data,
-    id,
-    createdAt: +createdAt.toDate(),
-  };
+      const id = doc.id;
+      const { createdAt } = data;
+      return {
+        ...data,
+        id,
+        createdAt: +createdAt.toDate(),
+      };
     });
-    callback(newHuiks);
+    callback(newHuiks, false);
   });
 };
 
-export const getSingleHuik = async (id: string) => {
-  const docRef = doc(db, "Huiks", id);
-  const docSnap = await getDoc(docRef);
-  const response = docSnap.data();
-  if (!response) return;
-  const { createdAt } = response;
-
-  return { ...response, createdAt: +createdAt.toDate() };
+export const getSingleHuik = (idHuik: string, callback: any) => {
+  const docRef = doc(db, "Huiks", idHuik);
+  onSnapshot(docRef, (doc) => {
+    const docSnap = () => {
+      const response = doc.data();
+      if (!response) return;
+      const { createdAt } = response;
+      const { id } = doc;
+      return { ...response, id, createdAt: +createdAt.toDate() };
+    };
+    callback(docSnap);
+  });
 };
 
 export const deleteHuik = async (id: string) => {
@@ -74,7 +71,6 @@ export const uploadImage = (file: File) => {
   const task = uploadBytesResumable(storageRef, file);
   return task;
 };
-
 
 export const addToFirebase = async (huik: HuikProp) => {
   return addDoc(collection(db, "Huiks"), huik);

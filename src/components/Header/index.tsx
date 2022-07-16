@@ -5,7 +5,13 @@ import { AvatarUser } from "../AvatarUser";
 export const Header = () => {
   const { currentUser } = useHookerContext();
   return (
-    <HStack minH="32px" w="100%" px="16px">
+    <HStack
+      minH="32px"
+      w="100%"
+      px="16px"
+      pt="10px"
+      borderBottom="1px solid #38444d"
+    >
       <HStack spacing={5} h="52px">
         <AvatarUser
           size="sm"

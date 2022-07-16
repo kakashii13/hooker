@@ -1,12 +1,5 @@
 import { HStack, Icon } from "@chakra-ui/react";
-import {
-  AiFillHome,
-  AiOutlineSearch,
-  AiOutlineBell,
-  AiOutlineMail,
-} from "react-icons/ai";
-
-// const ARRAY_ICONS = [AiFillHome, AiOutlineSearch, AiOutlineBell, AiOutlineMail];
+import { AiFillHome, AiOutlineSearch, AiOutlineMail } from "react-icons/ai";
 
 export const NavBar = () => {
   return (
@@ -18,7 +11,6 @@ export const NavBar = () => {
     >
       <Icon as={AiFillHome} h="30px" w="30px" />
       <Icon as={AiOutlineSearch} h="30px" w="30px" />
-      <Icon as={AiOutlineBell} h="30px" w="30px" />
       <Icon as={AiOutlineMail} h="30px" w="30px" />
     </HStack>
   );

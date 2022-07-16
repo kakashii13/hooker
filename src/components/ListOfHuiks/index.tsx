@@ -5,7 +5,7 @@ import { Huik } from "../Huik";
 export const ListOfHuiks = () => {
   const { huiks } = useHookerContext();
   return (
-    <VStack w="100%" minH="100vh">
+    <VStack w="100%">
       {huiks?.map(
         ({
           avatar,
@@ -17,21 +17,21 @@ export const ListOfHuiks = () => {
           userName,
           id,
           name,
-          contentImg
+          contentImg,
         }) => (
-            <Huik
-              name={name}
-              avatar={avatar}
-              content={content}
-              createdAt={createdAt}
-              idUser={idUser}
-              likesCount={likesCount}
-              sharedCount={sharedCount}
-              userName={userName}
-              id={id}
-              contentImg={contentImg}
-              key={id}
-            />
+          <Huik
+            name={name}
+            avatar={avatar}
+            content={content}
+            createdAt={createdAt}
+            idUser={idUser}
+            likesCount={likesCount}
+            sharedCount={sharedCount}
+            userName={userName}
+            id={id}
+            contentImg={contentImg}
+            key={id}
+          />
         )
       )}
     </VStack>

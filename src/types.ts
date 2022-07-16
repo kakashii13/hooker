@@ -10,7 +10,8 @@ export interface HuikProp {
   sharedCount: number;
   id?: string;
   name: string;
-  contentImg?: string | null
+  contentImg?: string | null;
+  isDetail?: boolean;
 }
 
 export interface PropsChildren {
@@ -20,6 +21,7 @@ export interface PropsChildren {
 export interface ContextProps {
   huiks: HuikProp[];
   currentUser: User | undefined | null;
+  loading: boolean;
 }
 export interface User {
   email: string;
@@ -30,10 +32,4 @@ export interface User {
 
 export interface RouteProps {
   children: JSX.Element;
-}
-
-export interface HuikLinkProps {
-  children: JSX.Element;
-  id: string;
-  userName: string;
 }

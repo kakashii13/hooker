@@ -8,12 +8,13 @@ import { Login } from "./pages/Login";
 import { themeChakra } from "./theme";
 import "@fontsource/roboto";
 import { PrivateRoute } from "./components/PrivateRoute";
+import { NavBar } from "./components/NavBar";
 
 function App() {
   return (
     <ChakraProvider theme={themeChakra}>
       <HookerProvider>
-        <Container p="0">
+        <Container p="0" h="100%" borderX="1px solid #38444d">
           <BrowserRouter>
             <Routes>
               <Route path="/login" element={<Login />} />
@@ -43,6 +44,7 @@ function App() {
               />
             </Routes>
           </BrowserRouter>
+          <NavBar />
         </Container>
       </HookerProvider>
     </ChakraProvider>

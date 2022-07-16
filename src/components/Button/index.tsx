@@ -12,7 +12,7 @@ export const ButtonCompose = () => {
         h="56px"
         w="56px"
         right="10px"
-        bottom="20px"
+        bottom="80px"
         zIndex="10000"
       >
         <Icon as={AiOutlinePlus} h="24px" w="24px" />

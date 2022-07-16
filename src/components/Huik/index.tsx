@@ -1,5 +1,5 @@
-import { HStack, Icon, Image, Stack, Text, VStack } from "@chakra-ui/react";
 import React from "react";
+import { HStack, Icon, Image, Stack, Text, VStack } from "@chakra-ui/react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
 import { useHookerContext } from "../../context/HookerContext";
@@ -18,41 +18,48 @@ export const Huik = ({
   avatar,
   idUser,
   contentImg,
+  isDetail,
 }: HuikProp) => {
   const { currentUser } = useHookerContext();
-  const timeago = useTimeago(createdAt) 
-  
+  const timeago = useTimeago(createdAt);
+
   const createAlert = useAlert();
-  let navigate = useNavigate() 
+  let navigate = useNavigate();
 
   const indexOf = userName.lastIndexOf("@");
   const userNameNormalize = userName.slice(0, indexOf);
 
   const handleDelete = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    e.stopPropagation()
+    e.stopPropagation();
+    if (!id) return;
     deleteHuik(id);
     createAlert();
+    if (isDetail) {
+      navigate("/");
+    }
   };
 
   const handleLink = () => {
-    navigate(`/${userName}/status/${id}`)
-  }
+    if (isDetail) return;
+    navigate(`/${userNameNormalize}/status/${id}`);
+  };
 
   return (
-    <Stack w="100%"
-    _hover={{ bg: "#232e39" }}
-    borderBottom="1px solid #38444d"
-    mt="0!important"
-    cursor="pointer"
-    position="relative"
-    px="16px"
-    onClick={handleLink}
+    <Stack
+      w="100%"
+      _hover={isDetail ? { bg: "" } : { bg: "#232e39" }}
+      borderBottom="1px solid #38444d"
+      mt="0!important"
+      cursor={isDetail ? "auto" : "pointer"}
+      position="relative"
+      px="16px"
+      onClick={handleLink}
     >
       <HStack
         justifyContent="space-between"
         alignItems="start"
         mt="0!important"
-        p="12px 5px" 
+        p="12px 5px"
       >
         <Stack spacing={3}>
           <HStack alignItems="start" spacing={4}>
@@ -68,16 +75,16 @@ export const Huik = ({
                 mt="0!important"
               >
                 <Text>{`@${userNameNormalize} `}</Text>
-                <span>
-                ·
-                </span>
-    <Link to={`/${userName}/status/${id}`}>
-    <Stack _hover={{
-      textDecoration: "underline"
-    }}>
-    <time>{`${timeago}`}</time>
-    </Stack>
-    </Link>
+                <span>·</span>
+                <Link to={`/${userNameNormalize}/status/${id}`}>
+                  <Stack
+                    _hover={{
+                      textDecoration: "underline",
+                    }}
+                  >
+                    <time>{`${timeago}`}</time>
+                  </Stack>
+                </Link>
               </HStack>
             </VStack>
           </HStack>

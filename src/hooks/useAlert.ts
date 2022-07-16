@@ -7,7 +7,7 @@ export const useAlert = () => {
     toast({
       title: "Your Huik was deleted.",
       // description: "We've created your account for you.",
-      status: "success",
+      status: "error",
       duration: 3000,
       isClosable: true,
     });

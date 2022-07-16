@@ -7,7 +7,7 @@ export const useSingleHuik = (id: string) => {
   const [huik, setHuik] = useState<HuikProp>();
 
   useEffect(() => {
-    getSingleHuik(id).then((response) => setHuik(response as HuikProp));
+    getSingleHuik(id, setHuik);
   }, [id]);
 
   return { huik };
