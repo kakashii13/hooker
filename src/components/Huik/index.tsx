@@ -21,7 +21,7 @@ export const Huik = ({
   isDetail,
 }: HuikProp) => {
   const { currentUser } = useHookerContext();
-  const timeago = useTimeago(createdAt);
+  const timeago = useTimeago(+createdAt);
 
   const createAlert = useAlert();
   let navigate = useNavigate();
@@ -90,7 +90,7 @@ export const Huik = ({
           </HStack>
           <Text>{content}</Text>
           <Stack>
-            <Image src={contentImg} borderRadius="10px" />
+            {contentImg && <Image src={contentImg} borderRadius="10px" />}
           </Stack>
         </Stack>
       </HStack>

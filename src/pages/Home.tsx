@@ -1,4 +1,4 @@
-import { Spinner, Stack, VStack } from "@chakra-ui/react";
+import { HStack, Spinner, VStack } from "@chakra-ui/react";
 import { ButtonCompose } from "../components/Button";
 import { Header } from "../components/Header";
 import { ListOfHuiks } from "../components/ListOfHuiks";
@@ -14,10 +14,10 @@ export const Home = () => {
         <title> Home / Hooker</title>
       </Helmet>
       <Header />
-      <Stack>
+      <HStack w="100%" justifyContent="center">
         {loading ? <Spinner /> : <ListOfHuiks />}
         <ButtonCompose />
-      </Stack>
+      </HStack>
     </VStack>
   );
 };

@@ -72,6 +72,6 @@ export const uploadImage = (file: File) => {
   return task;
 };
 
-export const addToFirebase = async (huik: HuikProp) => {
+export const addToFirebase = (huik: HuikProp) => {
   return addDoc(collection(db, "Huiks"), huik);
 };

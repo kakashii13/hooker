@@ -31,7 +31,7 @@ export const HookerProvider = ({ children }: PropsChildren) => {
   useEffect(() => {
     let isSubscribe = true;
 
-    const handleTest = (huiks, loading) => {
+    const handleTest = (huiks: HuikProp[], loading: boolean) => {
       setHuiks(huiks);
       setLoading(loading);
     };

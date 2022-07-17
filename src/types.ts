@@ -33,3 +33,15 @@ export interface User {
 export interface RouteProps {
   children: JSX.Element;
 }
+
+export interface AvatarProp {
+  size: string;
+  avatar: string;
+}
+
+export interface HuikFormProps {
+  handleChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  drag: number;
+  setDrag: any;
+  setImgURL: any;
+}

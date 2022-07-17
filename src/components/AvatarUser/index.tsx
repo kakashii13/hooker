@@ -1,9 +1,5 @@
 import { Avatar } from "@chakra-ui/react";
-
-interface AvatarProp {
-  size: string;
-  avatar: string;
-}
+import { AvatarProp } from "../../types";
 
 export const AvatarUser = ({ size, avatar }: AvatarProp) => {
   return <Avatar size={size} src={avatar} />;

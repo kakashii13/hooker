@@ -1,15 +1,9 @@
-import { HStack, Icon, Image, Stack, Textarea, VStack } from "@chakra-ui/react";
-import React from "react";
-import { RiCloseFill } from "react-icons/ri";
+import { Icon, Image, Input, Stack, Textarea, VStack } from "@chakra-ui/react";
+import { RiCloseFill, RiImageAddLine } from "react-icons/ri";
 import { DragImageStates } from "../../enum";
 import { useUploadImg } from "../../hooks/useUploadImg";
-
-interface HuikFormProps {
-  handleChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  drag: number;
-  setDrag: any;
-  setImgURL: any;
-}
+import { HuikFormProps } from "../../types";
+import { ButtonEffect } from "../ButtonEffect";
 
 export const HuikForm = ({
   handleChange,
@@ -22,6 +16,7 @@ export const HuikForm = ({
     handleDragDrop,
     handleDragEnter,
     handleDragLeave,
+    handleInput,
     previewImg,
   } = useUploadImg(setDrag, setImgURL);
 
@@ -46,22 +41,30 @@ export const HuikForm = ({
       {previewImg && (
         <Stack position="relative">
           <Image borderRadius="15px" src={previewImg} />
-          <HStack
-            justifyContent="space-between"
-            borderRadius="9999"
-            _hover={{ bg: "#23282c", transition: "0.5s" }}
-            cursor="pointer"
-            position="absolute"
-            left="1"
-            top="1"
-            mt="0!important"
-            bg="blackAlpha.300"
-            p="8px"
-          >
+          <ButtonEffect isBg={true}>
             <Icon as={RiCloseFill} h="17px" w="17px" onClick={handleDelete} />
-          </HStack>
+          </ButtonEffect>
         </Stack>
       )}
+      <Stack
+        borderTop="1px solid #38444d"
+        w="100%"
+        pt="10px"
+        position="relative"
+      >
+        <Input
+          type="file"
+          id="file"
+          style={{ display: "none" }}
+          accept="*/image"
+          onChange={(e) => handleInput(e)}
+        />
+        <label htmlFor="file">
+          <ButtonEffect isBg={false}>
+            <Icon as={RiImageAddLine} color="purple.500" h="20px" w="20px" />
+          </ButtonEffect>
+        </label>
+      </Stack>
     </VStack>
   );
 };

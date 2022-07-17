@@ -1,7 +1,7 @@
 import { formatDistanceStrict } from "date-fns";
 import { useEffect, useState } from "react";
 
-export const useTimeago = (createdAt: number) => {
+export const useTimeago = (createdAt: number = 0) => {
   const [timeago, setTimeago] = useState(
     formatDistanceStrict(Date.now(), createdAt)
   );

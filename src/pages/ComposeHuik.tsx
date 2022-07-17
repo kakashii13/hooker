@@ -1,7 +1,7 @@
 import { Button, HStack, Icon, Stack } from "@chakra-ui/react";
 import { Timestamp } from "firebase/firestore";
 import React, { useState } from "react";
-import { AiOutlineArrowLeft } from "react-icons/ai";
+import { BsArrowLeftShort } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import { AvatarUser } from "../components/AvatarUser";
 import { useHookerContext } from "../context/HookerContext";
@@ -50,7 +50,7 @@ export const ComposeHuik = () => {
       </Helmet>
       <HStack justifyContent="space-between">
         <Link to="/">
-          <Icon as={AiOutlineArrowLeft} h="20px" w="20px" cursor="pointer" />
+          <Icon as={BsArrowLeftShort} h="30px" w="30px" cursor="pointer" />
         </Link>
         <Button
           colorScheme="primary"
