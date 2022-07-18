@@ -8,7 +8,6 @@ import { Login } from "./pages/Login";
 import { themeChakra } from "./theme";
 import "@fontsource/roboto";
 import { PrivateRoute } from "./components/PrivateRoute";
-import { NavBar } from "./components/NavBar";
 
 function App() {
   return (
@@ -44,7 +43,6 @@ function App() {
               />
             </Routes>
           </BrowserRouter>
-          <NavBar />
         </Container>
       </HookerProvider>
     </ChakraProvider>

@@ -18,6 +18,7 @@ export const Home = () => {
         {loading ? <Spinner /> : <ListOfHuiks />}
         <ButtonCompose />
       </HStack>
+      <NavBar />
     </VStack>
   );
 };
