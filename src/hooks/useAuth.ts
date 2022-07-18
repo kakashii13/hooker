@@ -2,6 +2,7 @@ import {
   GithubAuthProvider,
   GoogleAuthProvider,
   signInWithPopup,
+  signOut,
 } from "firebase/auth";
 import { auth } from "../firebase/client";
 
@@ -21,5 +22,9 @@ export const useAuth = () => {
     return { email, displayName, photoURL, uid };
   };
 
-  return { signWithGithub, signWithGoogle, mapUser };
+  const logout = () => {
+    return signOut(auth)
+  }
+
+  return { signWithGithub, signWithGoogle, mapUser, logout };
 };

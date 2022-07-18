@@ -60,7 +60,7 @@ export const HuikForm = ({
           onChange={(e) => handleInput(e)}
         />
         <label htmlFor="file">
-          <ButtonEffect isBg={false}>
+          <ButtonEffect isBg={false} isPosition={true}>
             <Icon as={RiImageAddLine} color="purple.500" h="20px" w="20px" />
           </ButtonEffect>
         </label>

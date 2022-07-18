@@ -9,6 +9,7 @@ import { ComposeStatus, DragImageStates } from "../enum";
 import { addToFirebase } from "../firebase/client";
 import { HuikForm } from "../components/HuikForm";
 import { Helmet } from "react-helmet";
+import { ButtonEffect } from "../components/ButtonEffect";
 
 export const ComposeHuik = () => {
   const { currentUser } = useHookerContext();
@@ -50,7 +51,9 @@ export const ComposeHuik = () => {
       </Helmet>
       <HStack justifyContent="space-between">
         <Link to="/">
-          <Icon as={BsArrowLeftShort} h="30px" w="30px" cursor="pointer" />
+      <ButtonEffect>
+      <Icon as={BsArrowLeftShort} h="30px" w="30px" cursor="pointer" />
+      </ButtonEffect>
         </Link>
         <Button
           colorScheme="primary"
