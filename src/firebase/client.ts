@@ -44,6 +44,8 @@ export const getHuiks = (callback: any) => {
       };
     });
     callback(newHuiks, false);
+  }, (error) => {
+    console.log(error.message);
   });
 };
 

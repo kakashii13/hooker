@@ -36,13 +36,13 @@ export const HookerProvider = ({ children }: PropsChildren) => {
       setLoading(loading);
     };
 
-    if (isSubscribe) {
+    if (isSubscribe && currentUser) {
       setLoading(true);
       getHuiks(handleTest);
     }
 
     () => (isSubscribe = false);
-  }, []);
+  }, [currentUser]);
 
   return (
     <hookerContext.Provider value={{ huiks, currentUser, loading }}>
