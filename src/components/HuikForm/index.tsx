@@ -56,7 +56,7 @@ export const HuikForm = ({
           type="file"
           id="file"
           style={{ display: "none" }}
-          accept="*/image"
+          accept="image/*"
           onChange={(e) => handleInput(e)}
         />
         <label htmlFor="file">
