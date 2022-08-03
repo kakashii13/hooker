@@ -1,7 +1,9 @@
-import { Button, Heading, VStack } from "@chakra-ui/react";
+import { Button, VStack } from "@chakra-ui/react";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
+import { FcGoogle } from "react-icons/fc";
+import { FaGithub } from "react-icons/fa";
 
 export const Login = () => {
   const { signWithGithub, signWithGoogle } = useAuth();
@@ -10,7 +12,7 @@ export const Login = () => {
   const loginWithGithub = async () => {
     try {
       await signWithGithub();
-      navigate("/");
+      navigate("/home");
     } catch {
       console.log("error");
     }
@@ -18,7 +20,7 @@ export const Login = () => {
   const loginWithGoogle = async () => {
     try {
       await signWithGoogle();
-      navigate("/");
+      navigate("/home");
     } catch (error) {
       const errortest = await error;
       console.log(errortest);
@@ -26,15 +28,25 @@ export const Login = () => {
   };
 
   return (
-    <VStack justifyContent="center" alignItems="center" h="100vh" spacing={5}>
+    <VStack justifyContent="center" alignItems="center" spacing={5}>
       <Helmet>
-        <title>Login / Hooker</title>
+        <title>Hooker. Share with Hooker</title>
       </Helmet>
-      <Heading size="4xl">Hooker</Heading>
-      <Button colorScheme="blackAlpha" type="submit" onClick={loginWithGithub}>
+      <Button
+        colorScheme="blackAlpha"
+        leftIcon={<FaGithub />}
+        type="submit"
+        onClick={loginWithGithub}
+      >
         Login with GitHub
       </Button>
-      <Button colorScheme="purple" type="submit" onClick={loginWithGoogle}>
+      <Button
+        bg="white"
+        color="black"
+        leftIcon={<FcGoogle />}
+        type="submit"
+        onClick={loginWithGoogle}
+      >
         Login with Google
       </Button>
     </VStack>

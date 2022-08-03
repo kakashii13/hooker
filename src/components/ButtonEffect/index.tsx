@@ -3,7 +3,7 @@ import { HStack } from "@chakra-ui/react";
 interface ButtonProps {
   children: JSX.Element;
   isBg?: boolean;
-  isPosition?: boolean
+  isPosition?: boolean;
 }
 
 export const ButtonEffect = ({ children, isBg, isPosition }: ButtonProps) => {

@@ -6,8 +6,8 @@ export const ButtonCompose = () => {
   return (
     <Link to="/compose/huik">
       <Button
-        colorScheme={"primary"}
-        position="fixed"
+        colorScheme="primary"
+        position="absolute"
         borderRadius="9999px"
         h="56px"
         w="56px"

@@ -17,7 +17,7 @@ export const HuikDetail = () => {
         <title>{`${currentUser?.displayName} on Hooker`}</title>
       </Helmet>
       <HStack p="16px" w="100%" spacing={6}>
-        <Link to="/">
+        <Link to="/home">
           <Icon as={BsArrowLeftShort} w="30px" h="30px" />
         </Link>
         <Heading as="h2" fontSize="20px">

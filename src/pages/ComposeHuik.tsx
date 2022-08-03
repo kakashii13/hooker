@@ -37,7 +37,7 @@ export const ComposeHuik = () => {
     setStatus(ComposeStatus.LOADING);
     await addToFirebase(huik);
     setStatus(ComposeStatus.SUCCESS);
-    navigate("/");
+    navigate("/home");
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -50,10 +50,10 @@ export const ComposeHuik = () => {
         <title>Compose new Huik / Hooker</title>
       </Helmet>
       <HStack justifyContent="space-between">
-        <Link to="/">
-      <ButtonEffect>
-      <Icon as={BsArrowLeftShort} h="30px" w="30px" cursor="pointer" />
-      </ButtonEffect>
+        <Link to="/home">
+          <ButtonEffect>
+            <Icon as={BsArrowLeftShort} h="30px" w="30px" cursor="pointer" />
+          </ButtonEffect>
         </Link>
         <Button
           colorScheme="primary"

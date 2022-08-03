@@ -41,7 +41,7 @@ export const HuikForm = ({
       {previewImg && (
         <Stack position="relative">
           <Image borderRadius="15px" src={previewImg} />
-          <ButtonEffect isBg={true}>
+          <ButtonEffect isBg={true} isPosition={true}>
             <Icon as={RiCloseFill} h="17px" w="17px" onClick={handleDelete} />
           </ButtonEffect>
         </Stack>

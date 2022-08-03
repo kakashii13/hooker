@@ -4,21 +4,21 @@ import { HookerProvider } from "./context/HookerContext";
 import { ComposeHuik } from "./pages/ComposeHuik";
 import { HuikDetail } from "./pages/HuikDetail";
 import { Home } from "./pages/Home";
-import { Login } from "./pages/Login";
 import { themeChakra } from "./theme";
-import "@fontsource/roboto";
 import { PrivateRoute } from "./components/PrivateRoute";
+import { Landing } from "./pages/Landing";
+import "@fontsource/roboto";
 
 function App() {
   return (
     <ChakraProvider theme={themeChakra}>
       <HookerProvider>
-        <Container p="0" h="100%" borderX="1px solid #38444d">
+        <Container p="0" h="100%">
           <BrowserRouter>
             <Routes>
-              <Route path="/login" element={<Login />} />
+              <Route path="/*" element={<Landing />} />
               <Route
-                path="/"
+                path="/home"
                 element={
                   <PrivateRoute>
                     <Home />

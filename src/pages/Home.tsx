@@ -4,22 +4,20 @@ import { Header } from "../components/Header";
 import { ListOfHuiks } from "../components/ListOfHuiks";
 import { Helmet } from "react-helmet";
 import { useHookerContext } from "../context/HookerContext";
-import { NavBar } from "../components/NavBar";
 
 export const Home = () => {
   const { loading } = useHookerContext();
 
   return (
-    <VStack minH="93%">
+    <VStack pb="20px" minH="100vh" position="relative">
       <Helmet>
         <title> Home / Hooker</title>
       </Helmet>
       <Header />
-      <HStack w="100%" justifyContent="center">
+      <HStack w="100%" minH="100%" justifyContent="center">
         {loading ? <Spinner /> : <ListOfHuiks />}
-        <ButtonCompose />
       </HStack>
-      <NavBar />
+      <ButtonCompose />
     </VStack>
   );
 };

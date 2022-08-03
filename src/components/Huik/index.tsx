@@ -35,7 +35,7 @@ export const Huik = ({
     deleteHuik(id);
     createAlert();
     if (isDetail) {
-      navigate("/");
+      navigate("/home");
     }
   };
 

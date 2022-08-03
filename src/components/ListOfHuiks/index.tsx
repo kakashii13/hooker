@@ -5,7 +5,7 @@ import { Huik } from "../Huik";
 export const ListOfHuiks = () => {
   const { huiks } = useHookerContext();
   return (
-    <VStack w="100%">
+    <VStack w="100%" h="100%">
       {huiks?.map(
         ({
           avatar,
